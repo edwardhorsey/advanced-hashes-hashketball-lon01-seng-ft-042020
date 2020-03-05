@@ -183,6 +183,7 @@ data.each { |key, value|
 hash
 end
 
+
 def big_shoe_rebounds
 data=game_hash
 largest_shoe = 0
@@ -195,8 +196,13 @@ data.each { |key, value|
   index+=1
   end
 }
-if 
+data.each { |key, value|
+  if value[:players][index][:shoe] = largest_shoe
+    return value[:players][index][:rebounds]
+  end
+}
 end
+
 
 
      #bonus
