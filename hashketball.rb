@@ -213,6 +213,26 @@ end
  
  
 def most_points_scored
+data=game_hash
+largest_shoe = 0
+data.each { |key, value|
+  index=0
+  while index<value[:players].count do
+    if value[:players][index][:shoe] > largest_shoe
+      largest_shoe = value[:players][index][:shoe]
+    end
+  index+=1
+  end
+}
+data.each { |key, value|
+  index=0
+  while index<value[:players].count do
+    if value[:players][index][:shoe] == largest_shoe
+      return value[:players][index][:rebounds]
+    end
+    index+=1
+  end
+}
 end
 
 def winning_team
