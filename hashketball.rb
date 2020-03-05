@@ -199,7 +199,7 @@ data.each { |key, value|
 data.each { |key, value|
   index=0
   while index<value[:players].count do
-    if value[:players][index][:shoe] = largest_shoe
+    if value[:players][index][:shoe] == largest_shoe
       return value[:players][index][:rebounds]
     end
     index+=1
