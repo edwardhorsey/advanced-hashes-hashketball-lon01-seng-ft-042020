@@ -135,36 +135,169 @@ data.each { |key, value|
 end
 
 def team_colors(team)
+data=game_hash
+data.each { |key, value|
+  if value[:team_name] == team
+    return value[:colors]
+  end
+}
 end
 
 def team_names
-
+data=game_hash
+array=[]
+data.each { |key, value|
+  array << value[:team_name]
+}
+array
 end
 
-def player_numbers
+def player_numbers(team)
+data=game_hash
+array = []
+data.each { |key, value|
+  bit=value[:players]
+  if value[:team_name] == team
+    index=0
+    while index<bit.count do
+    array << bit[index][:number]
+    index+=1
+    end
+  end
+}
+array
 end
 
-def player_stats
+def player_stats(player)
+data=game_hash
+hash={}
+data.each { |key, value|
+  index=0
+  while index<value[:players].count do
+  if value[:players][index][:player_name] == player
+    value[:players][index].delete(:player_name)
+    hash = value[:players][index]
+  end
+  index+=1
+  end}
+hash
 end
+
 
 def big_shoe_rebounds
+data=game_hash
+largest_shoe = 0
+data.each { |key, value|
+  index=0
+  while index<value[:players].count do
+    if value[:players][index][:shoe] > largest_shoe
+      largest_shoe = value[:players][index][:shoe]
+    end
+  index+=1
+  end
+}
+data.each { |key, value|
+  index=0
+  while index<value[:players].count do
+    if value[:players][index][:shoe] == largest_shoe
+      return value[:players][index][:rebounds]
+    end
+    index+=1
+  end
+}
 end
+
 
 
      #bonus
  
  
 def most_points_scored
+data=game_hash
+largest_shoe = 0
+data.each { |key, value|
+  index=0
+  while index<value[:players].count do
+    if value[:players][index][:points] > largest_shoe
+      largest_shoe = value[:players][index][:points]
+    end
+  index+=1
+  end
+}
+data.each { |key, value|
+  index=0
+  while index<value[:players].count do
+    if value[:players][index][:points] == largest_shoe
+      return value[:players][index][:player_name]
+    end
+    index+=1
+  end
+}
 end
 
 def winning_team
+data=game_hash
+both_scores = {}
+data.each {|key, value|
+    index=0
+    team_total=0
+    while index<value[:players].count do
+        team_total += value[:players][index][:points]
+    index+=1
+    end
+    both_scores[value[:team_name]] = team_total
+}
+puts both_scores
+both_scores.each {|key, value|
+if value == both_scores.values.max
+    puts key
+return key 
+end
+}
 end
 
 def player_with_longest_name
+data = game_hash
+list_of_players = []
+data.each {|key, value|
+    index=0
+    while index<value[:players].count do
+    list_of_players << value[:players][index][:player_name]
+        index+=1
+    end
+}
+list_of_players.max_by {|string| string.length} 
 end
 
-# long_name_steals_a_ton?
 
+# long_name_steals_a_ton?
+def long_name_steals_a_ton?
+data = game_hash
+highest_steal = 0
+data.each {|key, value|
+    index=0
+    while index<value[:players].count do
+    if highest_steal < value[:players][index][:steals]
+        highest_steal = value[:players][index][:steals]
+    end    
+        index+=1
+    end
+}
+longest_name_steal = 0
+data.each {|key, value|  
+    index=0
+    while index<value[:players].count do
+    if value[:players][index][:player_name] == player_with_longest_name
+        longest_name_steal = value[:players][index][:steals]
+    end
+    index+=1
+    end
+    }
+if longest_name_steal >= highest_steal
+    return true
+end
+false
+end
 
 
 
