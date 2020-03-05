@@ -192,7 +192,7 @@ data.each { |key, value|
   while index<value[:players].count do
     puts value[:players][index][:shoe]
     puts largest_shoe
-    if value[:players][index][:shoe] < largest_shoe
+    if value[:players][index][:shoe] > largest_shoe
       largest_shoe = value[:players][index][:shoe]
     end
   index+=1
