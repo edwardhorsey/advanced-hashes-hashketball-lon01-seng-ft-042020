@@ -195,6 +195,7 @@ data.each { |key, value|
     end
   index+=1
   end
+  puts largest_shoe
 }
 data.each { |key, value|
   index=0
