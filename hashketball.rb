@@ -236,6 +236,7 @@ data.each { |key, value|
 end
 
 def winning_team
+data=game_hash
 
 end
 
