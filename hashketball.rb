@@ -271,7 +271,33 @@ end
 
 
 # long_name_steals_a_ton?
-
+def long_name_steals_a_ton?
+data = game_hash
+highest_steal = 0
+data.each {|key, value|
+    index=0
+    while index<value[:players].count do
+    if highest_steal < value[:players][index][:steals]
+        highest_steal = value[:players][index][:steals]
+    end    
+        index+=1
+    end
+}
+longest_name_steal = 0
+data.each {|key, value|  
+    index=0
+    while index<value[:players].count do
+    if value[:players][index][:player_name] == player_with_longest_name
+        longest_name_steal = value[:players][index][:steals]
+    end
+    index+=1
+    end
+    }
+if longest_name_steal >= highest_steal
+    return true
+end
+false
+end
 
 
 
