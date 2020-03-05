@@ -135,19 +135,67 @@ data.each { |key, value|
 end
 
 def team_colors(team)
+data=game_hash
+data.each { |key, value|
+  if value[:team_name] == team
+    return value[:colors]
+  end
+}
 end
 
 def team_names
-
+data=game_hash
+array=[]
+data.each { |key, value|
+  array << value[:team_name]
+}
+array
 end
 
-def player_numbers
+def player_numbers(team)
+data=game_hash
+array = []
+data.each { |key, value|
+  bit=value[:players]
+  if value[:team_name] == team
+    index=0
+    while index<bit.count do
+    array << bit[index][:number]
+    index+=1
+    end
+  end
+}
+array
 end
 
-def player_stats
+def player_stats(player)
+data=game_hash
+hash={}
+data.each { |key, value|
+  index=0
+  while index<value[:players].count do
+  if value[:players][index][:player_name] == player
+    value[:players][index].delete(:player_name)
+    hash = value[:players][index]
+  end
+  index+=1
+  end}
+hash
 end
 
 def big_shoe_rebounds
+data=game_hash
+largest_shoe = 0
+data.each { |key, value|
+  index=0
+  while index<value[:players].count do
+    if value[:players][index][:shoe] < largest_shoe
+      value[:players][index][:shoe] = largest_shoe
+    end
+  index+=1
+  end
+}
+if 
 end
 
 
