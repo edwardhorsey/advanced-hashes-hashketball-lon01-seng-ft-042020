@@ -237,7 +237,23 @@ end
 
 def winning_team
 data=game_hash
-
+both_scores = {}
+data.each {|key, value|
+    index=0
+    team_total=0
+    while index<value[:players].count do
+        team_total += value[:players][index][:points]
+    index+=1
+    end
+    both_scores[value[:team_name]] = team_total
+}
+puts both_scores
+both_scores.each {|key, value|
+if value == both_scores.values.max
+    puts key
+return key 
+end
+}
 end
 
 def player_with_longest_name
