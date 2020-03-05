@@ -257,8 +257,18 @@ end
 end
 
 def player_with_longest_name
-
+data = game_hash
+list_of_players = []
+data.each {|key, value|
+    index=0
+    while index<value[:players].count do
+    list_of_players << value[:players][index][:player_name]
+        index+=1
+    end
+}
+list_of_players.max_by {|string| string.length} 
 end
+
 
 # long_name_steals_a_ton?
 
